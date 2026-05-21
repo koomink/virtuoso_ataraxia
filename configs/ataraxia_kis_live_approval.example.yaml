@@ -3,7 +3,6 @@ mode: live_approval
 portfolio:
   base_currency: KRW
   allocation_mode: currency_sleeves
-  initial_cash: 10000000
   cash_by_currency:
     KRW: 10000000
   allowed_symbols:
@@ -76,7 +75,6 @@ universe:
 strategies:
   - id: ataraxia
     enabled: true
-    mode: live_approval
     weight: 1.0
     entrypoint: "ataraxia.strategy:AtaraxiaStrategy"
     config:
@@ -129,10 +127,6 @@ execution:
     non_trading_day_policy: next_trading_day
     target_policy: buy_only_toward_target
 
-risk:
-  max_single_asset_weight: 0.7
-  min_cash_weight: 0.0
-
 state:
   sqlite_path: var/ataraxia_kis_live_approval_state.db
 
@@ -146,8 +140,6 @@ approval:
   default_decision: expired
   timeout_seconds: 300
   telegram_bot_token_env: TELEGRAM_BOT_TOKEN
-  telegram_allowed_chat_ids: []
-  whitelisted_user_ids: []
   telegram_poll_interval_seconds: 1.0
 
 kis:
