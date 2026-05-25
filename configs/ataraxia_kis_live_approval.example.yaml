@@ -1,59 +1,14 @@
 mode: live_approval
+app_fragment_paths:
+  - fragments/ataraxia.yaml
 
 portfolio:
   base_currency: KRW
   allocation_mode: currency_sleeves
   cash_by_currency:
     KRW: 10000000
-  allowed_symbols:
-    - CASH_KRW
-    - TIGER_NASDAQ100_LEVERAGE
-    - KODEX_US_DIVIDEND_DOWJONES
-  currency_sleeves:
-    KRW:
-      cash_symbol: CASH_KRW
-      symbols:
-        - TIGER_NASDAQ100_LEVERAGE
-        - KODEX_US_DIVIDEND_DOWJONES
 
 universe:
-  instruments:
-    - symbol: CASH_KRW
-      asset_type: cash
-      region: KR
-      currency: KRW
-      broker: kis
-      broker_product: kis_domestic_stock
-      broker_symbol: KRW
-      exchange_code: KRX
-      quantity_step: 1
-      price_tick: 1
-      min_order_quantity: 1
-      min_order_notional: 0
-    - symbol: TIGER_NASDAQ100_LEVERAGE
-      asset_type: domestic_etf
-      region: KR
-      currency: KRW
-      broker: kis
-      broker_product: kis_domestic_stock
-      broker_symbol: "418660"
-      exchange_code: KRX
-      quantity_step: 1
-      price_tick: 1
-      min_order_quantity: 1
-      min_order_notional: 1
-    - symbol: KODEX_US_DIVIDEND_DOWJONES
-      asset_type: domestic_etf
-      region: KR
-      currency: KRW
-      broker: kis
-      broker_product: kis_domestic_stock
-      broker_symbol: "489250"
-      exchange_code: KRX
-      quantity_step: 1
-      price_tick: 1
-      min_order_quantity: 1
-      min_order_notional: 1
   policy:
     allowed_asset_types:
       - domestic_etf
@@ -76,19 +31,10 @@ strategies:
   - id: ataraxia
     enabled: true
     weight: 1.0
-    entrypoint: "ataraxia.strategy:AtaraxiaStrategy"
-    config:
-      sleeve: KRW
-      allocations:
-        TIGER_NASDAQ100_LEVERAGE: 0.60
-        KODEX_US_DIVIDEND_DOWJONES: 0.40
 
 datahub:
   provider: yahoo
   stale_after_seconds: 604800
-  symbol_map:
-    TIGER_NASDAQ100_LEVERAGE: 418660.KS
-    KODEX_US_DIVIDEND_DOWJONES: 489250.KS
 
 execution:
   engine: paper

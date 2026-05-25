@@ -21,28 +21,37 @@ quote, account, or order-submission logic into Ataraxia.
 
 ## Maestro Registration
 
+Ataraxia ships an app fragment at
+`configs/fragments/ataraxia.yaml`. The fragment owns the strategy entrypoint,
+default 60/40 strategy config, KRW sleeve membership, domestic ETF instrument
+metadata, Yahoo symbol map hints, and the recommendation that this app is best
+used with Maestro's `buy_only_contribution` order generation mode.
+
+Operator profiles still own money-moving choices such as broker account,
+approval, risk limits, state/audit paths, `order_posture`, `monthly_budget`, and
+`buy_day`. Those values should live in the Maestro operator config or in a
+private operator-local overlay, not in the app fragment.
+
 ```yaml
+app_fragment_paths:
+  - /root/projects/Symphony/Virtuoso/Ataraxia/configs/fragments/ataraxia.yaml
+
 strategies:
   - id: ataraxia
     enabled: true
-    mode: paper
     weight: 1.0
-    entrypoint: "ataraxia.strategy:AtaraxiaStrategy"
-    config:
-      sleeve: KRW
-      allocations:
-        TIGER_NASDAQ100_LEVERAGE: 0.60
-        KODEX_US_DIVIDEND_DOWJONES: 0.40
 ```
 
 Use Maestro's `buy_only_contribution` execution mode to turn this target into
-monthly buy-only orders.
+monthly buy-only orders. Set `execution.contribution.monthly_budget` and
+`execution.contribution.buy_day` in the operator config.
 
 ## Live Approval Preparation
 
 `configs/ataraxia_kis_live_approval.example.yaml` is a safe example for KIS ISA
 domestic ETF approval flow:
 
+- It composes `configs/fragments/ataraxia.yaml`.
 - KRW sleeve only.
 - KIS domestic stock broker product only.
 - ETF broker symbols `418660` and `489250`.
