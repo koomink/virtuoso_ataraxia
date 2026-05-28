@@ -51,6 +51,13 @@ through `strategy_accounts.yaml`: Ataraxia maps to an execution sleeve whose
 still set `execution.contribution.monthly_budget` and
 `execution.contribution.buy_day` directly.
 
+If the Ataraxia execution sleeve opts in to `contribution.funding_request`, a
+monthly buy day with cash below `min_monthly_budget` creates a Telegram funding
+request instead of silently producing no order. The funding request is only an
+operator reminder to add cash; tapping `입금 완료` makes Maestro refresh cash and
+regenerate the signal, and any resulting orders still require separate Telegram
+approval.
+
 ## Live Approval Preparation
 
 `configs/ataraxia_kis_live_approval.example.yaml` is a safe example for KIS ISA
