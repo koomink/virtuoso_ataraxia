@@ -28,9 +28,10 @@ metadata, Yahoo symbol map hints, and the recommendation that this app is best
 used with Maestro's `buy_only_contribution` order generation mode.
 
 Operator profiles still own money-moving choices such as broker account,
-approval, risk limits, state/audit paths, `order_posture`, `monthly_budget`, and
-`buy_day`. Those values should live in the Maestro operator config or in a
-private operator-local overlay, not in the app fragment.
+execution sleeve routing, approval, risk limits, state/audit paths,
+`order_posture`, `monthly_budget`, and `buy_day`. Those values should live in
+the Maestro operator config or in a private operator-local overlay, not in the
+app fragment.
 
 ```yaml
 app_fragment_paths:
@@ -43,8 +44,12 @@ strategies:
 ```
 
 Use Maestro's `buy_only_contribution` execution mode to turn this target into
-monthly buy-only orders. Set `execution.contribution.monthly_budget` and
-`execution.contribution.buy_day` in the operator config.
+monthly buy-only orders. In Symphony operator profiles this is normally resolved
+through `strategy_accounts.yaml`: Ataraxia maps to an execution sleeve whose
+`order_generation_mode` is `buy_only_contribution`, and that sleeve owns
+`contribution.monthly_budget` and `contribution.buy_day`. Standalone examples may
+still set `execution.contribution.monthly_budget` and
+`execution.contribution.buy_day` directly.
 
 ## Live Approval Preparation
 
