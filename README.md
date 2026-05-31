@@ -1,6 +1,6 @@
-# Ataraxia
+# Tranquillo
 
-Ataraxia is a Virtuoso Path A strategy for Maestro. It emits a KRW sleeve target
+Tranquillo is a Virtuoso Path A strategy for Maestro. It emits a KRW sleeve target
 for a monthly buy-only contribution workflow; Maestro owns data acquisition,
 order generation, account state, approval, and execution.
 
@@ -17,12 +17,12 @@ other broker/data API directly.
 
 The manifest supports `paper` and `live_approval`. Live approval support means
 Maestro may run the strategy in a live approval workflow; it does not move broker,
-quote, account, or order-submission logic into Ataraxia.
+quote, account, or order-submission logic into Tranquillo.
 
 ## Maestro Registration
 
-Ataraxia ships an app fragment at
-`configs/fragments/ataraxia.yaml`. The fragment owns the strategy entrypoint,
+Tranquillo ships an app fragment at
+`configs/fragments/tranquillo.yaml`. The fragment owns the strategy entrypoint,
 default 60/40 strategy config, KRW sleeve membership, domestic ETF instrument
 metadata, Yahoo symbol map hints, and the recommendation that this app is best
 used with Maestro's `buy_only_contribution` order generation mode.
@@ -35,23 +35,23 @@ app fragment.
 
 ```yaml
 app_fragment_paths:
-  - /root/projects/Symphony/Virtuoso/Ataraxia/configs/fragments/ataraxia.yaml
+  - /root/projects/Symphony/Virtuoso/Tranquillo/configs/fragments/tranquillo.yaml
 
 strategies:
-  - id: ataraxia
+  - id: tranquillo
     enabled: true
     weight: 1.0
 ```
 
 Use Maestro's `buy_only_contribution` execution mode to turn this target into
 monthly buy-only orders. In Symphony operator profiles this is normally resolved
-through `strategy_accounts.yaml`: Ataraxia maps to an execution sleeve whose
+through `strategy_accounts.yaml`: Tranquillo maps to an execution sleeve whose
 `order_generation_mode` is `buy_only_contribution`, and that sleeve owns
 `contribution.monthly_budget` and `contribution.buy_day`. Standalone examples may
 still set `execution.contribution.monthly_budget` and
 `execution.contribution.buy_day` directly.
 
-If the Ataraxia execution sleeve opts in to `contribution.funding_request`, a
+If the Tranquillo execution sleeve opts in to `contribution.funding_request`, a
 monthly buy day with cash below `min_monthly_budget` creates a Telegram funding
 request instead of silently producing no order. The funding request is only an
 operator reminder to add cash; tapping `입금 완료` makes Maestro refresh cash and
@@ -60,10 +60,10 @@ approval.
 
 ## Live Approval Preparation
 
-`configs/ataraxia_kis_live_approval.example.yaml` is a safe example for KIS ISA
+`configs/tranquillo_kis_live_approval.example.yaml` is a safe example for KIS ISA
 domestic ETF approval flow:
 
-- It composes `configs/fragments/ataraxia.yaml`.
+- It composes `configs/fragments/tranquillo.yaml`.
 - KRW sleeve only.
 - KIS domestic stock broker product only.
 - ETF broker symbols `418660` and `489250`.
@@ -90,17 +90,17 @@ Do not commit account numbers, tokens, app keys, or Telegram chat/user IDs.
 
 ## Maestro Runtime Install
 
-Install Ataraxia into the Maestro virtualenv before loading the strategy from a
+Install Tranquillo into the Maestro virtualenv before loading the strategy from a
 Maestro config:
 
 ```bash
 cd /root/projects/Symphony/Maestro
-uv pip install --python .venv/bin/python /root/projects/Symphony/Virtuoso/Ataraxia
+uv pip install --python .venv/bin/python /root/projects/Symphony/Virtuoso/Tranquillo
 ```
 
 Use a normal package install for operator rehearsals so Maestro does not depend
 on `PYTHONPATH` or an editable source path. Reinstall with the same command after
-Ataraxia code changes.
+Tranquillo code changes.
 
 Then progress through the operational modes:
 

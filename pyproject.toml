@@ -3,7 +3,7 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ataraxia"
+name = "virtuoso-tranquillo"
 version = "0.1.0"
 description = "Monthly buy-only KRW ETF allocation strategy for Maestro."
 readme = "README.md"

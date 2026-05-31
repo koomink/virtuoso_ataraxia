@@ -4,16 +4,16 @@ from pathlib import Path
 from maestro.config.loader import load_config
 from maestro.sdk import BaseStrategyPlugin, DataBundle, StrategyContext, TargetAllocationResult
 
-from ataraxia.strategy import AtaraxiaStrategy
+from tranquillo.strategy import TranquilloStrategy
 
 
-def test_ataraxia_strategy_contract_and_sdk_boundary():
-    strategy = AtaraxiaStrategy()
+def test_tranquillo_strategy_contract_and_sdk_boundary():
+    strategy = TranquilloStrategy()
     context = StrategyContext(
         cycle_id="test",
         timestamp=datetime.now(UTC),
         run_mode="paper",
-        strategy_id="ataraxia",
+        strategy_id="tranquillo",
         config={
             "sleeve": "KRW",
             "allocations": {
@@ -49,7 +49,7 @@ def test_ataraxia_strategy_contract_and_sdk_boundary():
         }
     }
 
-    source = Path("src/ataraxia/strategy.py").read_text()
+    source = Path("src/tranquillo/strategy.py").read_text()
     assert "from maestro.sdk import" in source
     assert "maestro.portfolio" not in source
     assert "maestro.risk" not in source
@@ -60,13 +60,13 @@ def test_ataraxia_strategy_contract_and_sdk_boundary():
     assert "koreainvestment" not in source.lower()
 
 
-def test_ataraxia_live_approval_contract_stays_strategy_only():
-    strategy = AtaraxiaStrategy()
+def test_tranquillo_live_approval_contract_stays_strategy_only():
+    strategy = TranquilloStrategy()
     context = StrategyContext(
         cycle_id="test-live",
         timestamp=datetime.now(UTC),
         run_mode="live_approval",
-        strategy_id="ataraxia",
+        strategy_id="tranquillo",
         config={"sleeve": "KRW"},
     )
 
@@ -86,7 +86,7 @@ def test_ataraxia_live_approval_contract_stays_strategy_only():
 
 
 def test_live_approval_example_config_loads_with_safe_defaults():
-    config = load_config("configs/ataraxia_kis_live_approval.example.yaml")
+    config = load_config("configs/tranquillo_kis_live_approval.example.yaml")
 
     assert config.mode == "live_approval"
     assert config.portfolio.base_currency == "KRW"

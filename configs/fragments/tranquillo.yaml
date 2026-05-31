@@ -1,10 +1,10 @@
 fragment_version: 1
 
 strategy:
-  id: ataraxia
+  id: tranquillo
   enabled: true
   weight: 1.0
-  entrypoint: "ataraxia.strategy:AtaraxiaStrategy"
+  entrypoint: "tranquillo.strategy:TranquilloStrategy"
   config:
     sleeve: KRW
     allocations:

@@ -1,6 +1,6 @@
 mode: live_approval
 app_fragment_paths:
-  - fragments/ataraxia.yaml
+  - fragments/tranquillo.yaml
 
 portfolio:
   base_currency: KRW
@@ -28,7 +28,7 @@ universe:
     require_data_freshness_check: true
 
 strategies:
-  - id: ataraxia
+  - id: tranquillo
     enabled: true
     weight: 1.0
 
@@ -74,10 +74,10 @@ execution:
     target_policy: buy_only_toward_target
 
 state:
-  sqlite_path: var/ataraxia_kis_live_approval_state.db
+  sqlite_path: var/tranquillo_kis_live_approval_state.db
 
 audit:
-  jsonl_path: var/ataraxia_kis_live_approval_audit.jsonl
+  jsonl_path: var/tranquillo_kis_live_approval_audit.jsonl
 
 approval:
   enabled: true

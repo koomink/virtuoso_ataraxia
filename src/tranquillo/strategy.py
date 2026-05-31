@@ -12,16 +12,16 @@ DEFAULT_ALLOCATIONS = {
     "KODEX_US_DIVIDEND_DOWJONES": 0.40,
 }
 DEFAULT_SLEEVE = "KRW"
-STRATEGY_ID = "ataraxia"
+STRATEGY_ID = "tranquillo"
 STRATEGY_VERSION = "0.1.0"
 
 
-class AtaraxiaStrategy(BaseStrategyPlugin):
+class TranquilloStrategy(BaseStrategyPlugin):
     def manifest(self) -> StrategyManifest:
         return StrategyManifest(
             sdk_contract_version="1.1",
             strategy_id=STRATEGY_ID,
-            name="Ataraxia",
+            name="Tranquillo",
             version=STRATEGY_VERSION,
             description="Monthly buy-only KRW ETF target allocation for Maestro.",
             supported_modes=["paper", "live_approval"],
